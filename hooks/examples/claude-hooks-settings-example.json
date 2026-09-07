@@ -1,0 +1,42 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "hooks/block-dangerous-commands.sh \"$CLAUDE_TOOL_COMMAND\""
+          },
+          {
+            "type": "command",
+            "command": "hooks/protect-main-branch-actions.sh \"$CLAUDE_TOOL_COMMAND\""
+          },
+          {
+            "type": "command",
+            "command": "hooks/require-release-checklist.sh \"$CLAUDE_TOOL_COMMAND\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "hooks/check-secrets.sh"
+          },
+          {
+            "type": "command",
+            "command": "hooks/require-tests-after-code-change.sh"
+          },
+          {
+            "type": "command",
+            "command": "hooks/require-migration-rollback.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

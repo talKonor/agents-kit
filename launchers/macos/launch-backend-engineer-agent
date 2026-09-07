@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+KIT_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)
+exec "$KIT_ROOT/scripts/run-agent.sh" "backend-engineer" "$@"
